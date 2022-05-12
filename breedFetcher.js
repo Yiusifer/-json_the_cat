@@ -1,6 +1,6 @@
 const request = require('request')
 
-let fetch = (breed) => {
+/*let fetch = (breed) => {
   request(`https://api.thecatapi.com/v1/breeds/search?q=${breed}`, (error, response, body) => {
 
     if (error) {
@@ -16,4 +16,23 @@ let fetch = (breed) => {
 
 }
 
-fetch("siberian")
+fetch("siberian")*/
+
+const fetchBreedDescription = function(breedName, callback) {
+
+  request(`https://api.thecatapi.com/v1/breeds/search?q=${breedName}`, (error, response, body) => {
+
+    /*if (error) {
+       return error;
+    } else {*/
+    const data = JSON.parse(body);
+    return data[0].description;
+
+
+  })
+
+};
+
+module.exports = { fetchBreedDescription };
+
+fetchBreedDescription("siberian")
